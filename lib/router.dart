@@ -1,3 +1,5 @@
+import 'package:mim_generator/models/meme.dart';
+import 'package:mim_generator/ui/views/editor/editor_page.dart';
 import 'package:mim_generator/ui/views/error_page.dart';
 import 'package:mim_generator/ui/views/home/home_page.dart';
 import 'package:mim_generator/ui/views/wip_page.dart';
@@ -21,8 +23,13 @@ final routerProvider = Provider<GoRouter>((ref) {
     ],
     errorBuilder: (context, state) => ErrorPage(state.error),
     routes: [
-      buildRoute(Routes.home, path: "/", page: HomePage()),
-      buildRoute(Routes.editor, page: WipPage()),
+      buildRoute(Routes.home, path: "/", page: HomePage(), routes: [
+        buildRoute(
+          Routes.editor,
+          path: "editor",
+          builder: (state) => EditorPage(state.extra! as Meme),
+        ),
+      ]),
     ],
   );
 });
@@ -40,10 +47,12 @@ buildRoute(
   String? path,
   Widget? page,
   Function(GoRouterState)? builder,
+  List<RouteBase> routes = const <RouteBase>[],
 }) {
   return GoRoute(
     path: path ?? "/$name",
     name: name,
     pageBuilder: (context, state) => buildPage(state, page ?? builder!(state)),
+    routes: routes,
   );
 }
