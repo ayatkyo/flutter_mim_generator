@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mim_generator/models/meme.dart';
 import 'package:mim_generator/services/imgflip_service.dart';
 
-final homeController = StateNotifierProvider.autoDispose<_Controller, AsyncValue<List<Meme>>>((ref) {
+final homeController = StateNotifierProvider<_Controller, AsyncValue<List<Meme>>>((ref) {
   return _Controller(ref.read);
 });
 
