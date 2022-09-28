@@ -1,16 +1,11 @@
-# mim_generator
+# mim_generator (Coding Test Algostudio)
 
-A new Flutter project.
+Flutter Developer Speciality Test
 
-## Getting Started
+## Screenshot
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="docs/ss_home.png" width="200"> &nbsp;
+<img src="docs/ss_editor_1.png" width="200"> &nbsp;
+<img src="docs/ss_editor_2.png" width="200"> &nbsp;
+<img src="docs/ss_editor_3.png" width="200"> &nbsp;
+<img src="docs/ss_share.png" width="200"> 
