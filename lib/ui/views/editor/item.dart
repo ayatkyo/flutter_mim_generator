@@ -57,16 +57,36 @@ class _EditorItemWidgetState extends ConsumerState<EditorItemWidget> {
         child: SizedBox(
           width: double.infinity,
           height: double.infinity,
-          child: widget.data.type == 'text' ? FittedBox(
-            child: Text(
-              widget.data.data,
-              style: AppFonts.secondary(
-                color: Colors.grey.shade800,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ) : Image.file(File(widget.data.data), fit: BoxFit.cover,),
+          child: widget.data.type == 'text'
+              ? FittedBox(
+                  child: Stack(
+                    children: [
+                      Text(
+                        widget.data.data,
+                        style: AppFonts.secondary(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          foreground: Paint()
+                            ..style = PaintingStyle.stroke
+                            ..strokeWidth = 3
+                            ..color = Colors.black,
+                        ),
+                      ),
+                      Text(
+                        widget.data.data,
+                        style: AppFonts.secondary(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : Image.file(
+                  File(widget.data.data),
+                  fit: BoxFit.cover,
+                ),
         ),
       ),
     );
