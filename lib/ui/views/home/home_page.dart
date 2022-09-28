@@ -26,7 +26,7 @@ class HomePage extends ConsumerWidget {
               ),
             ),
             Text(
-              viewModel.whenData((value) => "Ada ${value.length} memes").value ?? "Sedang memuat",
+              viewModel.whenData((value) => "Ada ${value.length} mim").value ?? "Sedang memuat",
               style: AppFonts.secondary(
                 color: Colors.white.withOpacity(0.5),
                 fontSize: 12,
