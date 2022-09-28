@@ -2,6 +2,11 @@
 
 Flutter Developer Speciality Test
 
+## Daftar Isi
+
+- [Screenshot](#screenshot)
+- [Download APK](#download-apk)
+
 ## Screenshot
 
 <img src="docs/ss_home.png" width="250"> &nbsp;
