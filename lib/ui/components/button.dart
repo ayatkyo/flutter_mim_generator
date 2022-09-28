@@ -13,7 +13,7 @@ class Button extends StatelessWidget {
   final EdgeInsets? padding;
 
   final TextStyle defaultTextStyle = const TextStyle(
-    color: Color(0xFF888384),
+    color: Color(0xFF50494B),
     fontWeight: FontWeight.bold,
     fontSize: 16,
   );
@@ -33,6 +33,18 @@ class Button extends StatelessWidget {
     this.textStyle,
     this.icon,
   }) : super(key: key);
+
+  TextStyle _textStyle() {
+    if (textStyle != null) {
+      return textStyle!;
+    }
+
+    if (textColor != null) {
+      return TextStyle(color: textColor);
+    }
+
+    return defaultTextStyle;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,14 +69,19 @@ class Button extends StatelessWidget {
         onPressed: onPressed,
         child: Row(
           children: [
-            if (icon != null) Container(
-              margin: EdgeInsets.only(right: 10),
-              child: Icon(icon, color: textColor, size: defaultTextStyle.fontSize! * 1.5,),
-            ),
+            if (icon != null)
+              Container(
+                margin: const EdgeInsets.only(right: 10),
+                child: Icon(
+                  icon,
+                  color: _textStyle().color,
+                  size: defaultTextStyle.fontSize! * 1.5,
+                ),
+              ),
             Expanded(
               child: Text(
                 text,
-                style: defaultTextStyle.merge(textStyle ?? (textColor != null ? TextStyle(color: textColor) : null)),
+                style: defaultTextStyle.merge(_textStyle()),
                 textAlign: TextAlign.center,
               ),
             ),
