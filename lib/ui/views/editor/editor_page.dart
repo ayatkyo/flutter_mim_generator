@@ -75,7 +75,11 @@ class EditorPage extends ConsumerWidget {
                           },
                         ),
                       ),
-                      for (EditorItem t in itemList) EditorItemWidget(t),
+                      for (EditorItem item in itemList)
+                        EditorItemWidget(
+                          item,
+                          onEdit: () => controller.editClick(item),
+                        ),
                     ],
                   ),
                 ),

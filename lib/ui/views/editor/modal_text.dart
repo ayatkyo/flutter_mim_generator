@@ -7,11 +7,13 @@ import 'package:mim_generator/ui/components/form_group.dart';
 import 'package:one_context/one_context.dart';
 
 class EditorTextModal extends HookConsumerWidget {
-  const EditorTextModal({super.key});
+  String? oldValue;
+
+  EditorTextModal({super.key, this.oldValue});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final input = useTextEditingController();
+    final input = useTextEditingController(text: oldValue);
 
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -115,12 +117,13 @@ class EditorTextModal extends HookConsumerWidget {
 
 Future<T> showEditorTextModal<T>({
   required BuildContext context,
+  String? value,
 }) async {
   FocusManager.instance.primaryFocus?.unfocus();
 
   return await showDialog(
     context: context,
     barrierDismissible: true,
-    builder: (context) => const EditorTextModal(),
+    builder: (context) => EditorTextModal(oldValue: value),
   );
 }

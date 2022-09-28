@@ -10,8 +10,9 @@ import 'package:mim_generator/utils/toast.dart';
 
 class EditorItemWidget extends ConsumerStatefulWidget {
   EditorItem data;
+  void Function()? onEdit;
 
-  EditorItemWidget(this.data, {super.key});
+  EditorItemWidget(this.data, {super.key, this.onEdit});
 
   @override
   ConsumerState<EditorItemWidget> createState() => _EditorItemWidgetState();
@@ -32,9 +33,7 @@ class _EditorItemWidgetState extends ConsumerState<EditorItemWidget> {
     return DraggableResizable(
       key: Key('editorItem_${widget.data.type}_${widget.data.id}'),
       canTransform: selectedItem == widget.data.id,
-      onEdit: () {
-        toastInfo("TODO EDIT ${widget.data.id}");
-      },
+      onEdit: widget.onEdit,
       onDelete: () async {
         ref.read(editorItemsProvider.notifier).update((state) {
           var newState = state.where((element) => element.id != widget.data.id);

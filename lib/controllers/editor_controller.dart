@@ -45,6 +45,19 @@ class _Controller extends StateNotifier<bool> {
     }
   }
 
+  editClick(EditorItem item) async {
+    if (item.type != 'text') {
+      toastError("Hanya text yang bisa diubah");
+      return;
+    }
+
+    String? newText = await showEditorTextModal(context: OneContext.instance.context!, value: item.data);
+    if (newText != null) {
+      item.data = newText;
+      read(editorItemsProvider.notifier).update((state) => [...state]);
+    }
+  }
+
   addLogoClick() async {
     final XFile? image = await imagePicker.pickImage(source: ImageSource.gallery);
     if (image != null) {
@@ -59,6 +72,11 @@ class _Controller extends StateNotifier<bool> {
 
   Future<String?> generateMeme() async {
     try {
+      //  Clear focus ke objek di editor
+      read(editorSelectedItemProvider.notifier).update((state) => null);
+      await Future.delayed(Duration(milliseconds: 200));
+
+      //  Ambil gambar
       final editor = read(editorKeyProvider).currentContext?.findRenderObject() as RenderRepaintBoundary?;
       final image = await editor?.toImage();
       final imageData = await image?.toByteData(format: ImageByteFormat.png);
