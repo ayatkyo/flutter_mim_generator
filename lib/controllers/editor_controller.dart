@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -9,6 +10,7 @@ import 'package:mim_generator/models/editor_item.dart';
 import 'package:mim_generator/ui/views/editor/modal_text.dart';
 import 'package:mim_generator/utils/toast.dart';
 import 'package:one_context/one_context.dart';
+import 'package:path_provider/path_provider.dart';
 
 final editorController = StateNotifierProvider.autoDispose<_Controller, bool>((ref) => _Controller(ref.read));
 final editorItemsProvider = StateProvider.autoDispose<List<EditorItem>>((ref) => []);
@@ -54,18 +56,36 @@ class _Controller extends StateNotifier<bool> {
     }
   }
 
-  saveClick() async {
+  Future<String?> generateMeme() async {
     try {
-      final imgBoundary = read(editorKeyProvider).currentContext?.findRenderObject() as RenderRepaintBoundary?;
-      final image = await imgBoundary?.toImage();
+      final editor = read(editorKeyProvider).currentContext?.findRenderObject() as RenderRepaintBoundary?;
+      final image = await editor?.toImage();
       final imageData = await image?.toByteData(format: ImageByteFormat.png);
+      final imageBytes = imageData!.buffer.asUint8List();
 
-      await ImageGallerySaver.saveImage(imageData!.buffer.asUint8List(), quality: 100);
-      
-      toastSuccess("Gambar berhasil disimpan");
+      //  Create temp file
+      final tempDir = await getTemporaryDirectory();
+      final savePath = "${tempDir.path}/meme_temp.png";
+      File file = await File(savePath).create();
+      await file.writeAsBytes(imageBytes);
+
+      return savePath;
     } catch (e) {
-      toastError(e.toString());
+      return null;
     }
+  }
+
+  saveClick() async {
+    String? newMeme = await generateMeme();
+
+    if (newMeme == null) {
+      toastError("Gagal menyimpan gambar");
+      return;
+    }
+
+    //  Save meme ke gallery
+    await ImageGallerySaver.saveFile(newMeme);
+    toastSuccess("Gambar berhasil disimpan");
   }
 
   shareClick() {
