@@ -2,14 +2,22 @@
 
 Flutter Developer Speciality Test
 
+## Screenshot
+
+<img src="docs/ss_home.png" width="250"> &nbsp;
+<img src="docs/ss_editor_1.png" width="250"> &nbsp;
+<img src="docs/ss_editor_2.png" width="250"> &nbsp;
+<img src="docs/ss_editor_3.png" width="250"> &nbsp;
+<img src="docs/ss_share.png" width="250"> 
+
 ## Download APK
 
 Untuk download .apk silakan cek [disini](https://github.com/ayatkyo/flutter_mim_generator/actions/workflows/flutter.yml).
 
-## Screenshot
+**Klik workflow terbaru yang berwarna hijau**
 
-<img src="docs/ss_home.png" width="200"> &nbsp;
-<img src="docs/ss_editor_1.png" width="200"> &nbsp;
-<img src="docs/ss_editor_2.png" width="200"> &nbsp;
-<img src="docs/ss_editor_3.png" width="200"> &nbsp;
-<img src="docs/ss_share.png" width="200"> 
+![](docs/ss_action_1.png)
+
+**Scroll ke bagian bawah, dan klik pada Mim-Generator.zip**
+
+![](docs/ss_action_2.png)
