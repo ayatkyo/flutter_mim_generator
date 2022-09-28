@@ -2,6 +2,7 @@ import 'package:mim_generator/models/meme.dart';
 import 'package:mim_generator/ui/views/editor/editor_page.dart';
 import 'package:mim_generator/ui/views/error_page.dart';
 import 'package:mim_generator/ui/views/home/home_page.dart';
+import 'package:mim_generator/ui/views/share/share_page.dart';
 import 'package:mim_generator/ui/views/wip_page.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +13,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class Routes {
   static const String home = "home";
   static const String editor = "editor";
+  static const String share = "share";
 }
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -28,6 +30,11 @@ final routerProvider = Provider<GoRouter>((ref) {
           Routes.editor,
           path: "editor",
           builder: (state) => EditorPage(state.extra! as Meme),
+        ),
+        buildRoute(
+          Routes.share,
+          path: "share",
+          builder: (state) => SharePage(state.extra! as String),
         ),
       ]),
     ],
