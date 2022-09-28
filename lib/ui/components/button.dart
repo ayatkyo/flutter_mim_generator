@@ -59,7 +59,7 @@ class Button extends StatelessWidget {
           children: [
             if (icon != null) Container(
               margin: EdgeInsets.only(right: 10),
-              child: Icon(icon, size: defaultTextStyle.fontSize! * 1.5,),
+              child: Icon(icon, color: textColor, size: defaultTextStyle.fontSize! * 1.5,),
             ),
             Expanded(
               child: Text(
