@@ -15,6 +15,7 @@ class FormGroup extends StatelessWidget {
     this.maxLength,
     this.keyboardType,
     this.onChanged,
+    this.onSubmitted,
   });
 
   String label;
@@ -27,6 +28,7 @@ class FormGroup extends StatelessWidget {
   int? maxLength;
   TextInputType? keyboardType;
   Function(String)? onChanged;
+  Function(String)? onSubmitted;
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +59,7 @@ class FormGroup extends StatelessWidget {
             controller: ctrl,
             keyboardType: keyboardType,
             onChanged: onChanged,
+            onSubmitted: onSubmitted,
             decoration: InputDecoration(
               contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
               isDense: true,
