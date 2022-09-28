@@ -1,0 +1,29 @@
+name: "Flutter deploy .apk"
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+env:
+  FLUTTER_VERSION: "3.3.2"
+
+jobs:
+  build:
+    name: "Build Flutter apk"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-java@v2
+      with:
+        distribution: 'zulu'
+        java-version: '11'
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+    - run: flutter pub get
+    - run: flutter build apk
+    - name: "Get artifact"
+      uses: actions/upload-artifact@v3
+      with:
+        name: Mim-Generator.zip
+        path: build/app/outputs/flutter-apk/app-release.apk
