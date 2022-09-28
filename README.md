@@ -2,6 +2,10 @@
 
 Flutter Developer Speciality Test
 
+## Download APK
+
+Untuk download .apk silakan cek [disini](https://github.com/ayatkyo/flutter_mim_generator/actions/workflows/flutter.yml).
+
 ## Screenshot
 
 <img src="docs/ss_home.png" width="200"> &nbsp;
