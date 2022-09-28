@@ -1,5 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/rendering.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mim_generator/models/editor_item.dart';
 import 'package:mim_generator/ui/views/editor/modal_text.dart';
@@ -50,8 +54,18 @@ class _Controller extends StateNotifier<bool> {
     }
   }
 
-  saveClick() {
-    toastInfo("TODO: Save");
+  saveClick() async {
+    try {
+      final imgBoundary = read(editorKeyProvider).currentContext?.findRenderObject() as RenderRepaintBoundary?;
+      final image = await imgBoundary?.toImage();
+      final imageData = await image?.toByteData(format: ImageByteFormat.png);
+
+      await ImageGallerySaver.saveImage(imageData!.buffer.asUint8List(), quality: 100);
+      
+      toastSuccess("Gambar berhasil disimpan");
+    } catch (e) {
+      toastError(e.toString());
+    }
   }
 
   shareClick() {
