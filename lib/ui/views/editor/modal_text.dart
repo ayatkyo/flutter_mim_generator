@@ -69,6 +69,7 @@ class EditorTextModal extends HookConsumerWidget {
                       label: "Text",
                       placeholder: "Masukkan text",
                       ctrl: input,
+                      onSubmitted: (_) => OneContext().popDialog(input.text),
                     ),
                     const SizedBox(
                       height: 4,
