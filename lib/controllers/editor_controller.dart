@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mim_generator/models/editor_item.dart';
+import 'package:mim_generator/router.dart';
 import 'package:mim_generator/ui/views/editor/modal_text.dart';
 import 'package:mim_generator/utils/toast.dart';
 import 'package:one_context/one_context.dart';
@@ -88,7 +89,14 @@ class _Controller extends StateNotifier<bool> {
     toastSuccess("Gambar berhasil disimpan");
   }
 
-  shareClick() {
-    toastInfo("TODO: Share");
+  shareClick() async {
+    String? newMeme = await generateMeme();
+
+    if (newMeme == null) {
+      toastError("Gagal menyiapkan gambar");
+      return;
+    }
+
+    read(routerProvider).pushNamed(Routes.share, extra: newMeme);
   }
 }
