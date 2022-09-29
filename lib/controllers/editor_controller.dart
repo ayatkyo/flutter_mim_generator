@@ -78,7 +78,7 @@ class _Controller extends StateNotifier<bool> {
 
       //  Ambil gambar
       final editor = read(editorKeyProvider).currentContext?.findRenderObject() as RenderRepaintBoundary?;
-      final image = await editor?.toImage();
+      final image = await editor?.toImage(pixelRatio: 2.5);
       final imageData = await image?.toByteData(format: ImageByteFormat.png);
       final imageBytes = imageData!.buffer.asUint8List();
 
